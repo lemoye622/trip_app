@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:trip_app/dao/login_dao.dart';
+import 'package:trip_app/utils/navigator_util.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:trip_app/utils/string_util.dart';
 import 'package:trip_app/utils/view_util.dart';
@@ -61,7 +63,7 @@ class _LoginState extends State<Login> {
           }),
           hiSpace(height: 45),
           LoginButtonWidget('登录',
-              enable: loginEnable, onPressed: () => _login()),
+              enable: loginEnable, onPressed: () => _login(context)),
           hiSpace(height: 15),
           Align(
               alignment: Alignment.centerRight,
@@ -85,12 +87,19 @@ class _LoginState extends State<Login> {
     });
   }
 
-  _login() {}
+  _login(context) async {
+    try {
+      var result =
+          await LoginDao.login(userName: userName!, password: password!);
+      NavigatorUtil.goToHome(context);
+    } catch (e) {
+      print(e);
+    }
+  }
 
   Future<void> _jumpRegistration() async {
     // 跳转到注册账号H5页面
-    Uri url = Uri.parse(
-        'https://juejin.cn/post/7398342795435982902');
+    Uri url = Uri.parse('https://juejin.cn/post/7398342795435982902');
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       throw Exception('Could not launch $url');
     }
