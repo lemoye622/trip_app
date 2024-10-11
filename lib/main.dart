@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hi_cache/flutter_hi_cache.dart';
+import 'package:trip_app/dao/login_dao.dart';
+import 'package:trip_app/pages/home.dart';
 import 'package:trip_app/pages/login.dart';
 
 void main() {
@@ -8,32 +11,35 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const Login(),
-    );
+        title: 'Trip App',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: FutureBuilder<dynamic>(
+          future: HiCache.preInit(), // 初始化预加载
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            // 异步操作状态已完成
+            if (snapshot.connectionState == ConnectionState.done) {
+              // 没有登录令牌，说明没有登录过，跳转到登录页
+              if (LoginDao.getBoardingPass() == null) {
+                return const Login();
+              } else {
+                return const Home();
+              }
+            } else {
+              // 初始化过程中，设置一个居中圆形的进度条
+              return const Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
+          },
+        ));
   }
 }
 
