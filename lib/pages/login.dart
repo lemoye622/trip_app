@@ -22,6 +22,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false, // 防止键盘弹起影响布局
       body: Stack(
         children: [..._background(), _content()],
       ),
