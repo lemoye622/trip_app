@@ -20,6 +20,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('首页'),
+        backgroundColor: Colors.blue,
         actions: [_logoutBtn],
       ),
     );
