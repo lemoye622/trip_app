@@ -15,8 +15,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    // 更新导航器的context， 供退出登录时使用
-    NavigatorUtil.updateContext(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('首页'),

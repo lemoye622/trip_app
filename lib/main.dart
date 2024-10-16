@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hi_cache/flutter_hi_cache.dart';
 import 'package:trip_app/dao/login_dao.dart';
+import 'package:trip_app/navigator/tab_navigator.dart';
 import 'package:trip_app/pages/home.dart';
 import 'package:trip_app/pages/login.dart';
 
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
               if (LoginDao.getBoardingPass() == null) {
                 return const Login();
               } else {
-                return const Home();
+                return const TabNavigator();
               }
             } else {
               // 初始化过程中，设置一个居中圆形的进度条
