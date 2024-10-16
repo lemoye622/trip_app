@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:trip_app/dao/login_dao.dart';
-import 'package:trip_app/utils/navigator_util.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   get _logoutBtn => ElevatedButton(
       onPressed: () => LoginDao.logOut(), child: const Text('登出'));
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('首页'),
@@ -23,4 +23,7 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+  
+  @override
+  bool get wantKeepAlive => true;
 }
