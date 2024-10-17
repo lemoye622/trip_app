@@ -4,6 +4,7 @@ import 'package:trip_app/dao/login_dao.dart';
 import 'package:trip_app/navigator/tab_navigator.dart';
 import 'package:trip_app/pages/home.dart';
 import 'package:trip_app/pages/login.dart';
+import 'package:trip_app/utils/screen_adapter_helper.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         home: FutureBuilder<dynamic>(
           future: HiCache.preInit(), // 初始化预加载
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            ScreenHelper.inti(context); // 初始化屏幕适配工具
             // 异步操作状态已完成
             if (snapshot.connectionState == ConnectionState.done) {
               // 没有登录令牌，说明没有登录过，跳转到登录页
