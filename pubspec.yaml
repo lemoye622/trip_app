@@ -38,6 +38,7 @@ dependencies:
   url_launcher: ^6.1.9
   http: ^1.1.0
   flutter_hi_cache: ^0.0.1
+  carousel_slider: ^5.0.0
   
 
 dev_dependencies:

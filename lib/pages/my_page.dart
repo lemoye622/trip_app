@@ -4,7 +4,7 @@ class MyPage extends StatefulWidget {
   const MyPage({ Key? key }) : super(key: key);
 
   @override
-  _MyPageState createState() => _MyPageState();
+  State<MyPage> createState() => _MyPageState();
 }
 
 class _MyPageState extends State<MyPage> {
